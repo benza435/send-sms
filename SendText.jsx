@@ -14,7 +14,7 @@ const SendText = () => {
         // console.log the response
      
 
-          const token = 'JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXkiOiI0NDg1NDg4YS01MTNmLTRkM2ItYWJiMi1lNzcxOTYyYjYxYmQiLCJzZWNyZXQiOiJmYmM0M2RjYWRhODkzZGJmNTZmMzZjMzQ3NzI5Yzg4YjY2MjY1ZTc3OGQ4ODhiZmE0Mjc0YjA5NjA2YTIxYzE4IiwiaWF0IjoxNjIzNTA4Mzc2LCJleHAiOjI0MTE5MDgzNzZ9.AdAgEvfOxL2YCU-oUFvpCRhmvQylyLQp5vdG49E7vPs'
+          const token = 'insertkey'
           const url = 'https://api.thesmsworks.co.uk/v1/message/send'
 
           axios.post(url, {
