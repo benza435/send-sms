@@ -1,9 +1,11 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Text, View, TouchableOpacity } from 'react-native';
 import CountDownTimer from 'react-native-countdown-timer-hooks';
 
 
 function CounterApp({duration, timerEnd, setTimerEnd}) {
+
+
   console.log("DURATION",duration)
   // Timer References
   const refTimer = useRef();

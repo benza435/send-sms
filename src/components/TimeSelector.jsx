@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {View, Button, Platform, Text} from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import {durationInSeconds} from '../utils/time-utils'
@@ -9,8 +9,12 @@ export const TimeSelector = () => {
   const [mode, setMode] = useState('date');
   const [show, setShow] = useState(false);
   const [duration, setDuration] = useState(5);
-  //const [timerRunning, setTimerRunning] = useState(false)
   const [timerEnd, setTimerEnd] = useState(false);
+
+  useEffect(()=>{
+    setTimerEnd(true)
+  },[duration])
+
 
   const onChange = (event, selectedDate) => {
     
@@ -37,17 +41,20 @@ export const TimeSelector = () => {
 
   return (
     <View>
-      <View>
+ 
        
         <Button onPress={showDatepicker} title="Show date picker!" />
-      </View>
-      <View>
+  
         <Button onPress={showTimepicker} title="Show time picker!" />
-      </View>
-      <View>
-        <Button onPress={() => {setTimerEnd(false); console.log("button pressed");console.log("new duration!:",duration)
+   
+        <Button onPress={() => {
+          setTimerEnd(false); 
+          console.log("button pressed");
+          console.log("new duration!:",duration)
         }} title="Start timer!" />
-      </View>
+
+        <Button onPress={()=> {setDuration(0)}} title="Reset"/>
+
       <Text>duration in state: {duration}</Text>
       {show && (
         <DateTimePicker
