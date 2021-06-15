@@ -1,10 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Text, View, TouchableOpacity } from 'react-native';
+import {  View } from 'react-native';
 import CountDownTimer from 'react-native-countdown-timer-hooks';
+import SendTextOnTimerEnd from './sendTextOnTimerEnd';
 
 
-function CounterApp({duration, timerEnd, setTimerEnd}) {
 
+function CounterApp({duration, timerEnd, setTimerEnd,confirmedContactNumber}) {
+  
 
   console.log("DURATION",duration)
   // Timer References
@@ -13,6 +15,7 @@ function CounterApp({duration, timerEnd, setTimerEnd}) {
 
   const timerCallbackFunc = (timerFlag) => {
     // Setting timer flag to finished
+    console.log(timerFlag,"<<<timerFlag")
     setTimerEnd(timerFlag);
     
     console.log(timerEnd, "<<< timerEnd in the counter app func")
@@ -23,9 +26,7 @@ function CounterApp({duration, timerEnd, setTimerEnd}) {
   return (
     
       <View style={{ display: timerEnd ? 'none' : 'flex' }}>
-        
        {timerEnd === false ? 
-        
         <CountDownTimer 
           ref={refTimer}
           timestamp={duration}
@@ -44,10 +45,11 @@ function CounterApp({duration, timerEnd, setTimerEnd}) {
             fontWeight: '500',
             letterSpacing: 0.25,
           }}
-        /> : null}
+        /> : <SendTextOnTimerEnd confirmedContactNumber={confirmedContactNumber}/>}
       </View>
       
    
   );
 }
+
 export default CounterApp;

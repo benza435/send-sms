@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {View, Button, Platform, Text} from 'react-native';
+import {View, Button, Platform, Text,TextInput, StyleSheet} from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import {durationInSeconds} from '../utils/time-utils'
 import CounterApp from './CounterApp'
@@ -11,14 +11,16 @@ export const TimeSelector = () => {
   const [show, setShow] = useState(false);
   const [duration, setDuration] = useState(0);
   const [timerEnd, setTimerEnd] = useState(false);
+  const [contactNumber, setContactNumber] = useState('');
+  const [confirmContactNumber, setConfirmContactNumber] = useState('');
+  const [confirmedContactNumber, setConfirmedContactNumber] = useState('');
+ 
 
   useEffect(()=>{
     setTimerEnd(true)
   },[duration])
-
-
+  
   const onChange = (event, selectedDate) => {
-    
     const currentDate = selectedDate || date;
     setShow(Platform.OS === 'ios');
     setDate(currentDate);
@@ -42,12 +44,8 @@ export const TimeSelector = () => {
 
   return (
     <View>
- 
-       
         <Button onPress={showDatepicker} title="Show date picker!" />
-  
         <Button onPress={showTimepicker} title="Show time picker!" />
-   
         <Button onPress={() => {
           setTimerEnd(false); 
           console.log("button pressed");
@@ -55,23 +53,50 @@ export const TimeSelector = () => {
         }} title="Start timer!" />
 
         <Button onPress={()=> {setDuration(0)}} title="Reset"/>
-
-      <Text>duration in state: {duration}</Text>
-      {show && (
-        <DateTimePicker
+        <TextInput
+        style={styles.input}
+        value={contactNumber}
+        placeholder="enter number"
+        onChangeText={setContactNumber}
+        keyboardType="numeric"
+      />
+      <TextInput
+        style={styles.input}
+        value={confirmContactNumber}
+        placeholder="Re-enter number"
+        onChangeText={setConfirmContactNumber}
+        keyboardType="numeric"
+      />
+      {(contactNumber===confirmContactNumber && confirmContactNumber!=='')?<Button
+        title="confirm number"
+        defaultValue={contactNumber}
+        onPress={() =>setConfirmedContactNumber(contactNumber)}
+      />:null}
+      
+        <Text>duration in state: {duration}</Text>
+        {show && (
+          <DateTimePicker
           testID="dateTimePicker"
           value={date}
           mode={mode}
           is24Hour={true}
           display="default"
           onChange={onChange}
-        />
+          />
       )}
       	<CounterApp 
         timerEnd={timerEnd}
         setTimerEnd={setTimerEnd}
-        duration={duration}/>
-        <SendText timerEnd={timerEnd}/>
+        duration={duration}
+        confirmedContactNumber={confirmedContactNumber}/>
+        {/* <SendText timerEnd={timerEnd}/> */}
     </View>
   );
 };
+const styles = StyleSheet.create({
+  input: {
+    height: 40,
+    margin: 12,
+    borderWidth: 1,
+  },
+});

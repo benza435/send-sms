@@ -6,7 +6,7 @@ import API_KEY from '../../API_KEY.env';
 
 const SendText = ({timerEnd}) => {
   const [contactNumber, setContactNumber] = useState('');
-  const [message, setMessage] = useState('sent with a time end');
+  const [message, setMessage] = useState('');
   console.log(timerEnd, "<<< timerEnd in the send text func");
 
   useEffect(()=>{
