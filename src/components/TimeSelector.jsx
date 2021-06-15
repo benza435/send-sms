@@ -3,12 +3,13 @@ import {View, Button, Platform, Text} from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import {durationInSeconds} from '../utils/time-utils'
 import CounterApp from './CounterApp'
+import SendText from './SendText';
 
 export const TimeSelector = () => {
   const [date, setDate] = useState(new Date());
   const [mode, setMode] = useState('date');
   const [show, setShow] = useState(false);
-  const [duration, setDuration] = useState(5);
+  const [duration, setDuration] = useState(0);
   const [timerEnd, setTimerEnd] = useState(false);
 
   useEffect(()=>{
@@ -70,6 +71,7 @@ export const TimeSelector = () => {
         timerEnd={timerEnd}
         setTimerEnd={setTimerEnd}
         duration={duration}/>
+        <SendText timerEnd={timerEnd}/>
     </View>
   );
 };

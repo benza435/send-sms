@@ -3,22 +3,57 @@ import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
 import axios from 'axios';
 import API_KEY from '../../API_KEY.env';
 
-const SendText = () => {
+
+const SendText = ({timerEnd}) => {
   const [contactNumber, setContactNumber] = useState('');
-  const [message, setMessage] = useState('');
+  const [message, setMessage] = useState('sent with a time end');
+  console.log(timerEnd, "<<< timerEnd in the send text func");
+
+  useEffect(()=>{
+    console.log(timerEnd, "<<< timerEnd in the send text func in useEffect");
+    axios({
+      method: 'post',
+      url: url,
+      data: {
+        sender: 'ramblr',
+        destination: contactNumber,
+        content: message,
+      },
+    }).then(
+      (response) => {
+        console.log(response);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+    //  axios({
+    //   method: 'get',
+    //   url: 'https://api.thesmsworks.co.uk/v1/credits/balance',
+    //   data: {
+    //   },
+    // }).then(
+    //   (response) => {
+    //     console.log(response);
+    //   },
+    //   (error) => {
+    //     console.log(error);
+    //   }
+    // );
+  },[timerEnd])
 
   const url = 'https://api.thesmsworks.co.uk/v1/message/send';
 
-  // axios.interceptors.request.use(
-  //   (config) => {
-  //     config.headers.authorization = API_KEY;
-
-  //     return config;
-  //   },
-  //   (err) => {
-  //     return Promise.reject(err);
-  //   }
-  // );
+  axios.interceptors.request.use(
+    (config) => {
+      config.headers.authorization = API_KEY;
+console.log("config changed");
+      return config;
+    },
+    (err) => {
+      return Promise.reject(err);
+    }
+  );
 
   const sendMessage = (contactNumber, message) => {
     axios({
