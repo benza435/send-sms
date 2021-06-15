@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
 import axios from 'axios';
-import API_KEY from './API_KEY.env';
+import API_KEY from '../../API_KEY.env';
 
 const SendText = () => {
   const [contactNumber, setContactNumber] = useState('');
