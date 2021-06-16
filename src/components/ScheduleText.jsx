@@ -8,11 +8,13 @@ import API_KEY from "../../API_KEY.env.js"
 
 const ScheduleText = ({endTime, latitude, longitude}) => {
   
-    const [contact, setContact] = useState('07590365354')
+    const [contactNumber, setContactNumber] = useState('')
     const [time, setTime] = useState(0)
     const [messageId, setMessageId] = useState(69420)
+    const [confirmContactNumber, setConfirmContactNumber] = useState('')
     const userName = "Cal"
     const contactName = "Christian"
+    const [confirmedContactNumber, setConfirmedContactNumber] = useState(''); 
 
 
 
@@ -41,7 +43,7 @@ console.log("endtime from ScheduleText:", endTime)
         const message = createMessage(userName, contactName, latitude, longitude)
         console.log(message)
         console.log("should send after",endTime,"but hardcoded for 10 seconds")
-        //sendMessage(contact, message)
+        //sendMessage(contactNumber, message)
     }, 5000); 
 
 
@@ -49,6 +51,30 @@ console.log("endtime from ScheduleText:", endTime)
       
     return (
         <View>
+    <TextInput
+        style={styles.input}
+        value={contactNumber}
+        placeholder="enter number"
+        onChangeText={setContactNumber}
+        keyboardType="numeric"
+      />
+      <TextInput
+        style={styles.input}
+        value={confirmContactNumber}
+        placeholder="Re-enter number"
+        onChangeText={setConfirmContactNumber}
+        keyboardType="numeric"
+      />
+        
+
+      {(contactNumber===confirmContactNumber && confirmContactNumber!=='')?<Button onPress={() => {
+        setConfirmedContactNumber(confirmContactNumber)
+          setTimerEnd(false); 
+          console.log("TimeSelector >>>>>> button pressed");
+          console.log("TimeSelector >>>>>>> new duration!:",duration)
+        }} title="Start timer!" />:null}
+
+
 
             <Text>endTime from TimeSelector is {endTime}</Text>
 

@@ -61,7 +61,6 @@ const TimeSelector = () => {
  
        
         <Button onPress={showDatepicker} title="Show date picker!" />
-  
         <Button onPress={showTimepicker} title="Show time picker!" />
    
       {show && (
