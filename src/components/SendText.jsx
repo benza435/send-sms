@@ -66,7 +66,7 @@ console.log("config changed");
       },
     }).then(
       (response) => {
-        console.log(response);
+        console.log(response.config.status);
       },
       (error) => {
         console.log(error);
