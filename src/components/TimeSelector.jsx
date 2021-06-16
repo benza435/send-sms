@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {View, Button, Platform, Text} from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
-import {durationInSeconds} from '../utils/time-utils'
+import durationInSeconds from '../utils/time-utils'
 import Coordinates from './Coordinates';
 
 import ScheduleText from './ScheduleText'

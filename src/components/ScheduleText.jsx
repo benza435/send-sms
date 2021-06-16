@@ -43,7 +43,7 @@ console.log("endtime from ScheduleText:", endTime)
         const message = createMessage(userName, contactName, latitude, longitude)
         console.log(message)
         console.log("should send after",endTime,"but hardcoded for 10 seconds")
-        //sendMessage(contactNumber, message)
+        // sendMessage(confirmedContactNumber, message) <<<< SENDS TEXT TO CORRECT NUMBER
     }, 5000); 
 
 
@@ -51,6 +51,7 @@ console.log("endtime from ScheduleText:", endTime)
       
     return (
         <View>
+          {/* <Text>'current number in state' {confirmedContactNumber}</Text> */}
     <TextInput
         style={styles.input}
         value={contactNumber}
@@ -69,9 +70,8 @@ console.log("endtime from ScheduleText:", endTime)
 
       {(contactNumber===confirmContactNumber && confirmContactNumber!=='')?<Button onPress={() => {
         setConfirmedContactNumber(confirmContactNumber)
-          setTimerEnd(false); 
+          // setTimerEnd(false); 
           console.log("TimeSelector >>>>>> button pressed");
-          console.log("TimeSelector >>>>>>> new duration!:",duration)
         }} title="Start timer!" />:null}
 
 

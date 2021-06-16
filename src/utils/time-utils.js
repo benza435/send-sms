@@ -39,13 +39,8 @@ const durationInSeconds = (endTime) => {
 	return Math.floor(duration);
 };
 
-module.exports = {
-	startTimeStamp,
-	plannedCompletionTimeStamp,
-	calcPlannedDuration,
-	datePreformatter,
-	durationInSeconds,
-};
+
+export default durationInSeconds
 
 //  getting:  2021-08-31T11:00:48.253Z
 // need:      June 30, 2021 13:46:23
