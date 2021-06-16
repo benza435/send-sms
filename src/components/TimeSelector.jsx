@@ -1,9 +1,10 @@
 import React, {useState, useEffect} from 'react';
-import {View, Button, Platform, Text,TextInput, StyleSheet} from 'react-native';
+import {View, Button, Platform, Text,TextInput, StyleSheet, Keyboard} from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import {durationInSeconds} from '../utils/time-utils'
 import CounterApp from './CounterApp'
 import SendText from './SendText';
+
 
 export const TimeSelector = () => {
   const [date, setDate] = useState(new Date());
@@ -14,7 +15,7 @@ export const TimeSelector = () => {
   const [contactNumber, setContactNumber] = useState('');
   const [confirmContactNumber, setConfirmContactNumber] = useState('');
   const [confirmedContactNumber, setConfirmedContactNumber] = useState('');
- 
+  
 
   useEffect(()=>{
     setTimerEnd(true)
@@ -43,16 +44,9 @@ export const TimeSelector = () => {
   };
 
   return (
-    <View>
+    <View style={styles.container}>
         <Button onPress={showDatepicker} title="Show date picker!" />
         <Button onPress={showTimepicker} title="Show time picker!" />
-        <Button onPress={() => {
-          setTimerEnd(false); 
-          console.log("button pressed");
-          console.log("new duration!:",duration)
-        }} title="Start timer!" />
-
-        <Button onPress={()=> {setDuration(0)}} title="Reset"/>
         <TextInput
         style={styles.input}
         value={contactNumber}
@@ -67,11 +61,16 @@ export const TimeSelector = () => {
         onChangeText={setConfirmContactNumber}
         keyboardType="numeric"
       />
-      {(contactNumber===confirmContactNumber && confirmContactNumber!=='')?<Button
-        title="confirm number"
-        defaultValue={contactNumber}
-        onPress={() =>setConfirmedContactNumber(contactNumber)}
-      />:null}
+        
+
+      {(contactNumber===confirmContactNumber && confirmContactNumber!=='')?<Button onPress={() => {
+        Keyboard.dismiss
+          setTimerEnd(false); 
+          console.log("button pressed");
+          console.log("new duration!:",duration)
+        }} title="Start timer!" />:null}
+
+        <Button onPress={()=> {setDuration(0)}} title="Reset"/>
       
         <Text>duration in state: {duration}</Text>
         {show && (
@@ -89,11 +88,14 @@ export const TimeSelector = () => {
         setTimerEnd={setTimerEnd}
         duration={duration}
         confirmedContactNumber={confirmedContactNumber}/>
-        {/* <SendText timerEnd={timerEnd}/> */}
+        <SendText timerEnd={timerEnd}/>
     </View>
   );
 };
 const styles = StyleSheet.create({
+  container:{
+    paddingTop: 50,
+  },
   input: {
     height: 40,
     margin: 12,

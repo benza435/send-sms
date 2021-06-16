@@ -2,6 +2,7 @@ import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
+
 import { TimeSelector } from './src/components/TimeSelector';
 export default function App() {
 	
@@ -9,6 +10,7 @@ export default function App() {
 		<View style={styles.container}>
 			<StatusBar style='auto' />
 			<TimeSelector  />
+			
 		</View>
 	);
 }

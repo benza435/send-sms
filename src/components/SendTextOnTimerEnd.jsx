@@ -1,60 +1,49 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text } from 'react-native';
-import axios from 'axios';
-import API_KEY from '../../API_KEY.env';
+ import axios from 'axios';
+// import API_KEY from '../../API_KEY.env';
+
+import API from '../../api'
 
 
-const SendTextOnTimerEnd = ({timerEnd, confirmedContactNumber}) => {
+const SendTextOnTimerEnd = async ({timerEnd, confirmedContactNumber}) => {
   
   const [message, setMessage] = useState('sent with a time end');
-  const url = 'https://api.thesmsworks.co.uk/v1/message/send';
-
-  console.log(timerEnd, "<<< timerEnd in the send text func");
-
-  useEffect(()=>{
-    console.log(timerEnd, "<<< timerEnd in the send text func in useEffect");
-    console.log("send text here")
-    // axios({
-    //   method: 'post',
-    //   url: url,
-    //   data: {
-    //     sender: 'ramblr',
-    //     destination: confirmedContactNumber,
-    //     content: message,
-    //   },
-    // }).then(
-    //   (response) => {
-    //     console.log(response);
-    //   },
-    //   (error) => {
-    //     console.log(error);
-    //   }
-    // );
-     axios({
-      method: 'get',
-      url: 'https://api.thesmsworks.co.uk/v1/credits/balance',
-    }).then(
-      (response) => {
-        console.log(response);
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
-  },[])
-
   
+  const getMoviesFromApi = () => {
+    return fetch('https://reactnative.dev/movies.json')
+      .then((response) => response.json())
+      .then((json) => {
+        return json.movies;
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+  const baseApi = axios.create({
+    baseURL: 'https://rest.clicksend.com/v3/sms/send',
+    auth:{username:'thegitstashes@gmail.com',password:API}
+  });
 
-  axios.interceptors.request.use(
-    (config) => {
-      config.headers.authorization = API_KEY;
-      console.log("config changed");
-      return config;
-    },
-    (err) => {
-      return Promise.reject(err);
-    }
-  );
+  const smsApi = new api.SMSApi("thegitstashes@gmail.com", API);
+  
+  const smsMessage = new api.SmsMessage();
+
+  console.log(baseApi,smsApi,smsMessage)
+  
+  smsMessage.source = "ramblr";
+  smsMessage.to = "+61411111111";
+  smsMessage.body = "test message";
+  
+  const smsCollection = new api.SmsMessageCollection();
+  
+  smsCollection.messages = [smsMessage];
+  
+  smsApi.smsSendPost(smsCollection).then((response) => {
+    console.log(response.body);
+  }).catch((err)=>{
+    console.error(err.body);
+  });
 
   return (
       <View>

@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import {  View } from 'react-native';
 import CountDownTimer from 'react-native-countdown-timer-hooks';
-import SendTextOnTimerEnd from './sendTextOnTimerEnd';
+
 
 
 
@@ -20,12 +20,13 @@ function CounterApp({duration, timerEnd, setTimerEnd,confirmedContactNumber}) {
     
     console.log(timerEnd, "<<< timerEnd in the counter app func")
     console.warn(
-      'You can alert the user by letting him know that Timer is out.',
+      'You can alert the user by letting them know that Timer is out.',
     );
   };
   return (
     
       <View style={{ display: timerEnd ? 'none' : 'flex' }}>
+       
        {timerEnd === false ? 
         <CountDownTimer 
           ref={refTimer}
@@ -45,7 +46,8 @@ function CounterApp({duration, timerEnd, setTimerEnd,confirmedContactNumber}) {
             fontWeight: '500',
             letterSpacing: 0.25,
           }}
-        /> : <SendTextOnTimerEnd confirmedContactNumber={confirmedContactNumber}/>}
+        /> : null}
+        
       </View>
       
    

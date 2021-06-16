@@ -76,25 +76,7 @@ console.log("config changed");
 
   return (
     <>
-      <TextInput
-        style={styles.input}
-        value={contactNumber}
-        placeholder="enter number"
-        onChangeText={setContactNumber}
-        keyboardType="numeric"
-      />
-
-      <TextInput
-        style={styles.input}
-        value={message}
-        placeholder="enter message"
-        onChangeText={setMessage}
-      />
-      <Button
-        title="send"
-        defaultValue={contactNumber}
-        onPress={() => sendMessage(contactNumber, message)}
-      />
+  
       <View>
         <Text>Contact number in state: {contactNumber}</Text>
         <Text>Message in state: {message}</Text>
