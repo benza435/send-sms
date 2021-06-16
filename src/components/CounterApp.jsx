@@ -6,19 +6,18 @@ import CountDownTimer from 'react-native-countdown-timer-hooks';
 
 
 function CounterApp({duration, timerEnd, setTimerEnd,confirmedContactNumber}) {
-  
 
-  console.log("DURATION",duration)
+  console.log("CounterApp >>>>>> DURATION",duration)
   // Timer References
   const refTimer = useRef();
   // For keeping a track on the Timer
 
   const timerCallbackFunc = (timerFlag) => {
     // Setting timer flag to finished
-    console.log(timerFlag,"<<<timerFlag")
+    console.log("CounterApp >>>>>>> ",timerFlag,"<<<timerFlag")
     setTimerEnd(timerFlag);
-    
-    console.log(timerEnd, "<<< timerEnd in the counter app func")
+    console.log("CounterApp >>>>>>> ",timerFlag,"<<<timerFlag after being set")
+    console.log("CounterApp >>>>>>>> ",timerEnd, "<<< timerEnd in the counter app func")
     console.warn(
       'You can alert the user by letting them know that Timer is out.',
     );

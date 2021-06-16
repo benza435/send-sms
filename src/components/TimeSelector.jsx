@@ -18,6 +18,7 @@ export const TimeSelector = () => {
   
 
   useEffect(()=>{
+    console.log("TimeSelector >>>>>>> setting timeEnd to true in TimeSelector")
     setTimerEnd(true)
   },[duration])
   
@@ -27,7 +28,7 @@ export const TimeSelector = () => {
     setDate(currentDate);
     const output = durationInSeconds(event.nativeEvent.timestamp)
     setDuration(output)
-    console.log(output, '<< output')
+    console.log("TimeSelector >>>>>>>  ",output, '<< output')
   };
 
   const showMode = (currentMode) => {
@@ -66,8 +67,8 @@ export const TimeSelector = () => {
       {(contactNumber===confirmContactNumber && confirmContactNumber!=='')?<Button onPress={() => {
         Keyboard.dismiss
           setTimerEnd(false); 
-          console.log("button pressed");
-          console.log("new duration!:",duration)
+          console.log("TimeSelector >>>>>> button pressed");
+          console.log("TimeSelector >>>>>>> new duration!:",duration)
         }} title="Start timer!" />:null}
 
         <Button onPress={()=> {setDuration(0)}} title="Reset"/>
