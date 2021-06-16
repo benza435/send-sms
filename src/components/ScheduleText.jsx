@@ -1,19 +1,33 @@
-import React, {useState} from 'react';
-import {scheduleMessage, sendMessage} from '../utils/sms-utils';
-import {View, Text, Button} from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {sendMessage, cancelMessage, createMessage} from '../utils/sms-utils';
+import {View, Text, Button, TextInput, StyleSheet} from 'react-native';
 import axios from 'axios';
 import API_KEY from "../../API_KEY.env.js"
 
 
 
-const ScheduleText = () => {
-    const [contact, setContact] = useState('07429818181')
-    const [time, setTime] = useState("June 17, 2021 13:46:23 ")
+const ScheduleText = ({endTime, latitude, longitude}) => {
+  
+    const [contact, setContact] = useState('07590365354')
+    const [time, setTime] = useState(0)
+    const [messageId, setMessageId] = useState(69420)
+    const userName = "Cal"
+    const contactName = "Christian"
+
+
+
+console.log("endtime from ScheduleText:", endTime)
+    
+// useEffect((endTime)=>{
+//       console.log("endtime before settime",endTime)
+//       setTime(endTime)
+//       console.log("endtime after settime",endTime)
+//     },[endTime])
 
     axios.interceptors.request.use(
         (config) => {
           config.headers.authorization = API_KEY;
-          console.log("SendText >>>>>>> ","config changed");
+          //console.log("SendText >>>>>>> ","config changed");
           return config;
         },
         (err) => {
@@ -21,14 +35,65 @@ const ScheduleText = () => {
         }
       );
 
+      setTimeout(() => { 
+        console.log( )
+        console.log('message send attempt');
+        const message = createMessage(userName, contactName, latitude, longitude)
+        console.log(message)
+        console.log("should send after",endTime,"but hardcoded for 10 seconds")
+        //sendMessage(contact, message)
+    }, 5000); 
+
+
+
+      
     return (
         <View>
-            <Text> This is a button</Text>
-            <Button title={'schedule'}onPress={()=>{scheduleMessage(contact, time)}} />
-            <Button title={'send'}onPress={()=>{sendMessage(contact)}} />
-            
+
+            <Text>endTime from TimeSelector is {endTime}</Text>
+
+      
+
         </View>
     );
 };
 
+
+const styles = StyleSheet.create({
+  input: {
+    height: 40,
+    margin: 12,
+    borderWidth: 1,
+  },
+});
+
 export default ScheduleText;
+
+
+
+
+
+
+
+
+
+
+
+
+            {/* <Text> time: {time}</Text>
+            <View>
+            <Button title={'schedule'} onPress={()=>{scheduleMessage(contact, endTime)}} />
+            </View>
+            
+            <View>
+            <TextInput
+            style={styles.input}
+        value={messageId}
+        placeholder="message id"
+        onChangeText={setMessageId}
+        keyboardType="numeric"
+      />
+            <Button title={'cancel'} onPress={()=>{cancelMessage(messageId)}} />
+            <Text>{messageId}</Text>
+            </View>
+            <Text>current duration: {endTime}</Text> */}

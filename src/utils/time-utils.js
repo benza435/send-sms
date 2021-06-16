@@ -1,5 +1,9 @@
 const moment = require('moment');
 
+const input = '2021-08-31T11:00:48.253Z';
+export const formatTime = (input) =>
+	moment(input).format('MMMM D, YYYY h:mm:ss');
+
 //  returns UTC timestamp of NOW
 const startTimeStamp = () => {
 	const timeStampUTC = new Date().getTime();
@@ -42,3 +46,6 @@ module.exports = {
 	datePreformatter,
 	durationInSeconds,
 };
+
+//  getting:  2021-08-31T11:00:48.253Z
+// need:      June 30, 2021 13:46:23
